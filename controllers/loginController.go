@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/firstAPI/auth"
-	"github.com/firstAPI/models"
-	"github.com/firstAPI/utils"
+	"github.com/first-api/auth"
+	"github.com/first-api/models"
+	"github.com/first-api/utils"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {

@@ -6,14 +6,16 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/firstAPI/models"
-	"github.com/firstAPI/utils"
-	"github.com/firstAPI/validations"
+	"github.com/first-api/models"
+	"github.com/first-api/service"
+	"github.com/first-api/utils"
+	"github.com/first-api/validations"
+
 	"github.com/gorilla/mux"
 )
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
-	users, err := models.GetUsers()
+	users, err := service.NewUserService().GetUsers()
 	if err != nil {
 		utils.ErrorResponse(w, err, http.StatusBadRequest)
 		return
@@ -23,9 +25,9 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r) // pq não como parâmetro da função?
+	params := mux.Vars(r)
 	id, _ := strconv.ParseUint(params["uid"], 10, 32)
-	user, err := models.GetUser(uint32(id))
+	user, err := service.NewUserService().GetById(uint32(id))
 	if err != nil {
 		utils.ErrorResponse(w, err, http.StatusBadRequest)
 		return
@@ -38,7 +40,7 @@ func PostUsers(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	var user models.User
 
-	err := json.Unmarshal(body, &user) // coloca o []bytes dentro da struct user
+	err := json.Unmarshal(body, &user)
 	if err != nil {
 		utils.ErrorResponse(w, err, http.StatusUnprocessableEntity)
 		return
@@ -50,7 +52,7 @@ func PostUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = models.NewUser(user)
+	_, err = service.NewUserService().NewUser(user)
 	if err != nil {
 		utils.ErrorResponse(w, err, http.StatusUnprocessableEntity)
 		return
@@ -70,7 +72,7 @@ func PutUser(w http.ResponseWriter, r *http.Request) {
 	}
 	user.UID = uint32(uid)
 
-	rows, err := models.UpdateUser(user)
+	rows, err := service.NewUserService().UpdateUser(user)
 	if err != nil {
 		utils.ErrorResponse(w, err, http.StatusUnprocessableEntity)
 		return
@@ -82,7 +84,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	uid, _ := strconv.ParseUint(params["uid"], 10, 32)
 
-	_, err := models.DeleteUser(uint32(uid))
+	_, err := service.NewUserService().DeleteUser(uint32(uid))
 	if err != nil {
 		utils.ErrorResponse(w, err, http.StatusUnprocessableEntity)
 		return

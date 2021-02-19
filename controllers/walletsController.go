@@ -5,8 +5,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/firstAPI/models"
-	"github.com/firstAPI/utils"
+	"github.com/first-api/models"
+	"github.com/first-api/utils"
+
 	"github.com/gorilla/mux"
 )
 

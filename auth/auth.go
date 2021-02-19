@@ -3,8 +3,9 @@ package auth
 import (
 	"errors"
 
-	"github.com/firstAPI/models"
-	"github.com/firstAPI/utils"
+	"github.com/first-api/models"
+	"github.com/first-api/service"
+	"github.com/first-api/utils"
 )
 
 var (
@@ -13,7 +14,7 @@ var (
 
 func SignIn(user models.User) (models.User, error) {
 	password := user.Password
-	user, err := models.GetUserByEmail(user.Email)
+	user, err := service.NewUserService().GetByEmail(user.Email)
 	if err != nil {
 		return user, err
 	}

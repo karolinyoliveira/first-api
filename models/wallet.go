@@ -3,7 +3,7 @@ package models
 import (
 	"errors"
 
-	"github.com/firstAPI/utils"
+	"github.com/first-api/utils"
 )
 
 var (

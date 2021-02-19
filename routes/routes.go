@@ -1,7 +1,8 @@
 package routes
 
 import (
-	"github.com/firstAPI/controllers"
+	"github.com/first-api/controllers"
+
 	"github.com/gorilla/mux"
 )
 

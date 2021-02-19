@@ -3,7 +3,7 @@ package validations
 import (
 	"errors"
 
-	"github.com/firstAPI/models"
+	"github.com/first-api/models"
 )
 
 var (
