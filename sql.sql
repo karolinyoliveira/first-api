@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users(
 );
 
 CREATE TABLE IF NOT EXISTS wallets(
-    public_key varchar(32) PRIMARY KEY /*UNIQUE NOT NULL*/,
+    public_key varchar(32) PRIMARY KEY,
     usr bigint NOT NULL,
     balance real DEFAULT 0.0,
     updated_at timestamp DEFAULT current_timestamp,
