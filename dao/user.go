@@ -17,6 +17,10 @@ type UserDao struct {
 
 func NewUserDao() *UserDao { return &UserDao{} }
 
+func GeneratePublicKey(w *models.Wallet) {
+	w.PublicKey = utils.Md5(w.User.Nickname + w.User.Password)
+}
+
 func (ud UserDao) GetById(con *sql.DB, id uint32) (models.User, error) {
 	sql := "SELECT * FROM users WHERE uid= $1"
 	rs, err := con.Query(sql, id)
@@ -108,7 +112,7 @@ func (ud UserDao) NewUser(con *sql.DB, user models.User) (bool, error) {
 	// DB: wallets
 	sql = "INSERT INTO wallets (public_key,usr) VALUES ($1, $2)"
 	wallet := models.Wallet{User: user}
-	wallet.GeneratePublicKey()
+	GeneratePublicKey(&wallet)
 	{
 		stmt, err := tx.Prepare(sql)
 		if err != nil {

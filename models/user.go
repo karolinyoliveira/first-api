@@ -1,13 +1,5 @@
 package models
 
-import (
-	"errors"
-)
-
-var (
-	ErrUserNotFound = errors.New("User Not Found")
-)
-
 type User struct {
 	UID       uint32 `json:"_id"`
 	Nickname  string `json:"nickname"`

@@ -5,10 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	_ "github.com/lib/pq" // underline = Import for side effect
+	_ "github.com/lib/pq"
 )
 
-// pq - A pure Go postgres driver for Go's database/sql package
 const (
 	USER    = "postgres"
 	PASS    = "postgres"
